@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  editor:
+    image: swaggerapi/swagger-editor
+    container_name: editor
+    ports:
+      - 8001:8080
+
+  ui:
+    image: swaggerapi/swagger-ui
+    container_name: ui
+    ports:
+      - 8002:8080
+    volumes:
+      - ./docs/sample.yaml:/sample.yaml
+    environment:
+      SWAGGER_JSON: /sample.yaml
+
+  mock:
+    image: swaggerapi/petstore3
+    container_name: mock
+    ports:
+      - 8003:8080
